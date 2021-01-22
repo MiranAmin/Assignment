@@ -8,10 +8,9 @@ import java.util.Scanner;
 public class ProcessingFiles {
 
     private String filePath;
+    private String fileContent;
     private String[] words;
     private InputCleaner cleaner; //Singleton??????????
-
-
 
 
     /*
@@ -19,6 +18,10 @@ public class ProcessingFiles {
      * */
     public ProcessingFiles(String file) {
         this.filePath = new InputCleaner().cleanFilePath(file);
+
+        this.fileContent = readNewFIle(this.filePath); // This is currently errored out because of readNewFile() -
+
+        cleanAndSplit();
     }
 
 
@@ -44,22 +47,17 @@ public class ProcessingFiles {
     }
 
     /*
-     * This method cleans and splits the input --> consider breaking it up into
-     separate methods
+     * This method cleans and splits the input
      */
-    public void cleanAndSplit() {
+    private void cleanAndSplit() { //make this private and use it in another method?
 
         try (FileInputStream fis = new FileInputStream(this.filePath)) {
+
             InputCleaner cleaner = new InputCleaner();
-            //byte[] b = new byte[fis.available()];
             String rawInput = new String(fis.readAllBytes());
             String cleanInput = cleaner.cleanInput(rawInput);
-            //System.out.println(cleanInput);
-
-
             String[] arr = cleaner.splitOnSpaces(cleanInput);
             setWords(arr);
-            //System.out.println(Arrays.toString(arr));
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -71,7 +69,7 @@ public class ProcessingFiles {
      * Counts each line in a text document excluding lines that are empty
      * in the line count
      * */
-    public void lineCount() throws FileNotFoundException {
+    public void lineCount() {
 
         File file = new File(this.filePath);
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
@@ -85,29 +83,56 @@ public class ProcessingFiles {
             }
 
             System.out.println("Number of rows: " + counter);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
+
+
+
+    //ISSUE IN TWO METHODS BELOW
+
 
     /*
      * Will simply read from  a file and output its contents
      * to the console
      * */
-    public void readFile() {
-        try (FileInputStream fr = new FileInputStream(this.filePath)) {
+    private String readFile(String path) throws IOException {
+
+        String str;
+        try (FileInputStream fr = new FileInputStream(path)) {
 
             byte[] b = new byte[fr.available()];
-            String str = new String(b);
-            System.out.println(str);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            str = new String(b);
         }
+
+        return str;
     }
 
 
+    public void readNewFIle(String path) {
+        //SINGLETON?
+        InputCleaner cleaner = new InputCleaner(); //give input cleaner a constructor so it automatically cleans?
+        setFilePath(cleaner.cleanFilePath(path));
+        try {
+
+            setFilePath(readFile(path));
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+
+
+
+
+
+
     /*
-    * Getters and Setters
-    * */
+     * Getters and Setters
+     * */
     public String getFilePath() {
         return filePath;
     }
@@ -124,9 +149,14 @@ public class ProcessingFiles {
         this.words = words;
     }
 
+
+    /*
+     * Singleton??
+     * */
     public InputCleaner getCleaner() {
         return cleaner;
     }
+
 
     public void setCleaner(InputCleaner cleaner) {
         this.cleaner = cleaner;

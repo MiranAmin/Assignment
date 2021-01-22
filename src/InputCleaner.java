@@ -1,13 +1,11 @@
 public class InputCleaner {
-/*
-    public static void main(String[] args) {
-        String str = "C:\\Users\\miran\\Desktop\\test\\test2.txt";
+
+    /*
+    * This class acts as a helper class to the ProcessingFiles class.
+    * It performs regular expressions on String inputs
+    *  */
 
 
-        String cleanPath = str.replaceAll("\\\\", "/" );
-        System.out.println(cleanPath);
-
-    }*/
 
     /*
      * Will ensure the backslash character  is converted into a
