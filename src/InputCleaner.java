@@ -17,7 +17,7 @@ public class InputCleaner {
     /*
      * Removes commas and periods from a String
      * and return a new string*/
-    public String cleanInput(String input) {
+    public String cleanFileContents(String input) {
         return input.replaceAll("[.,]", "");
 
     }
