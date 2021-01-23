@@ -11,6 +11,8 @@ public class ProcessingFiles {
     private final String fileContent;
     private String[] words;
 
+    //rawInput and clean input? Consider changing file content to one of these
+
 
     /*
      * Constructor
@@ -67,7 +69,7 @@ public class ProcessingFiles {
             letterCount += word.length();
         }
         System.out.print("Average number of letters: ");
-        System.out.printf("%.1f", letterCount / wordArr.length );
+        System.out.printf("%.1f", letterCount / wordArr.length);
         System.out.println();
 
     }
@@ -79,11 +81,7 @@ public class ProcessingFiles {
      * each individual word in the String[] field 'words'
      */
     private void cleanAndSplit() { //make this private and use it in another method?
-        try (FileInputStream fis = new FileInputStream(getFilePath())) {
-            setWords(new InputCleaner().splitOnSpaces(getFileContent()));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        setWords(new InputCleaner().splitOnSpaces(getFileContent()));
     }//add a line in here to set up the fileContent field --- make three different methods and put them into one?
 
 
