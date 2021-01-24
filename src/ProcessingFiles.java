@@ -62,7 +62,10 @@ public class ProcessingFiles {
         }
     }
 
-    public void avgLetterCount() {
+    /*
+    * The average number of letters per word is printed to one decimal place
+    * */
+    public void avgLetterPerWord() {
         String[] wordArr = getWords();
         double letterCount = 0;
         for (String word : wordArr) {
@@ -71,7 +74,30 @@ public class ProcessingFiles {
         System.out.print("Average number of letters: ");
         System.out.printf("%.1f", letterCount / wordArr.length);
         System.out.println();
+    }
 
+
+    /*
+    * This method will print out the most frequently reoccuring letter
+    * in a string. It does not account for multiple letters that
+    * occur an equal amount of times*/
+    public void mostFrequentLetter() {
+        int ASCII_SIZE = 256;
+        String str = new InputCleaner().removeSpace(getFileContent().toLowerCase());
+        int[] count = new int[ASCII_SIZE];
+        int len = str.length();
+        for (int i = 0; i < len; i++)
+            count[str.charAt(i)]++;
+        int max = -1;
+        char result = ' ';
+
+        for (int i = 0; i < len; i++) {
+            if (max < count[str.charAt(i)]) {
+                max = count[str.charAt(i)];
+                result = str.charAt(i);
+            }
+        }
+        System.out.println("Most frequently occurring letter: " + result);
     }
 
 
@@ -80,9 +106,9 @@ public class ProcessingFiles {
      * then splits the input on white spaces and stores
      * each individual word in the String[] field 'words'
      */
-    private void cleanAndSplit() { //make this private and use it in another method?
+    private void cleanAndSplit() {
         setWords(new InputCleaner().splitOnSpaces(getFileContent()));
-    }//add a line in here to set up the fileContent field --- make three different methods and put them into one?
+    }
 
 
 

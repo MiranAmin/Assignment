@@ -17,16 +17,20 @@ public class InputCleaner {
     /*
      * Removes commas and periods from a String
      * and return a new string*/
-    public String cleanFileContents(String input) {
-        return input.replaceAll("[.,]", "");
-
+    public String cleanFileContents(String str) {
+        return str.replaceAll("[.,]", "");
     }
+
+    public String removeSpace(String str) {
+        return str.replaceAll("\\s+", "");
+    }
+
 
     /*
     * Will split the contents of a string on white spaces
     * and return an array with a word at each index*/
-    public String[] splitOnSpaces(String string) {
-        return string.split("\\s+");
+    public String[] splitOnSpaces(String str) {
+        return str.split("\\s+");
     }
 
 
