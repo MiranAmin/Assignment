@@ -10,7 +10,7 @@ public class ProcessingFiles {
     private final String filePath;
     private final String fileContent;
     private String[] words;
-
+    private static InputCleaner cleaner;
     //rawInput and clean input? Consider changing file content to one of these
 
 
@@ -18,9 +18,17 @@ public class ProcessingFiles {
      * Constructor
      * */
     public ProcessingFiles(String filePath) {
+        this.cleaner = setCleaner();
         this.filePath = new InputCleaner().cleanFilePath(filePath);
         this.fileContent = readFile();
         cleanAndSplit();
+    }
+
+    private InputCleaner setCleaner() {
+        if (getCleaner() == null) {
+            return new InputCleaner();
+        }
+        return cleaner;
     }
 
 
@@ -83,7 +91,7 @@ public class ProcessingFiles {
     * occur an equal amount of times*/
     public void mostFrequentLetter() {
         int ASCII_SIZE = 256;
-        String str = new InputCleaner().removeSpace(getFileContent().toLowerCase());
+        String str = cleaner.removeSpace(getFileContent().toLowerCase());
         int[] count = new int[ASCII_SIZE];
         int len = str.length();
         for (int i = 0; i < len; i++)
@@ -107,7 +115,7 @@ public class ProcessingFiles {
      * each individual word in the String[] field 'words'
      */
     private void cleanAndSplit() {
-        setWords(new InputCleaner().splitOnSpaces(getFileContent()));
+        setWords(cleaner.splitOnSpaces(getFileContent()));
     }
 
 
@@ -122,7 +130,7 @@ public class ProcessingFiles {
     private String readFile() {
         String str = "";
         try (FileInputStream fis = new FileInputStream(getFilePath())) {
-            str = new InputCleaner().cleanFileContents(new String(fis.readAllBytes()));
+            str = cleaner.cleanFileContents(new String(fis.readAllBytes()));
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -145,15 +153,18 @@ public class ProcessingFiles {
     }
 
     public String[] getWords() {
-        return words;
+        return this.words;
     }
 
     public String getFileContent() {
-        return fileContent;
+        return this.fileContent;
     }
 
-    private void setWords(String[] words) {
-        this.words = words;
+    private void setWords(String[] arr) {
+        this.words = arr;
     }
 
+    public InputCleaner getCleaner() {
+        return cleaner;
+    }
 }
