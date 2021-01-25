@@ -11,14 +11,14 @@ public class ProcessingFiles {
     private final String fileContent;
     private String[] words;
     private static InputCleaner cleaner;
-    //rawInput and clean input? Consider changing file content to one of these
+
 
 
     /*
      * Constructor
      * */
     public ProcessingFiles(String filePath) {
-        this.cleaner = setCleaner();
+        cleaner = setCleaner();
         this.filePath = new InputCleaner().cleanFilePath(filePath);
         this.fileContent = readFile();
         cleanAndSplit();
@@ -146,7 +146,7 @@ public class ProcessingFiles {
 
 
     /*
-     * Getters and Setters
+     * Getters and Setter
      * */
     public String getFilePath() {
         return filePath;
@@ -160,11 +160,9 @@ public class ProcessingFiles {
         return this.fileContent;
     }
 
+    public InputCleaner getCleaner() { return cleaner; }
+
     private void setWords(String[] arr) {
         this.words = arr;
-    }
-
-    public InputCleaner getCleaner() {
-        return cleaner;
     }
 }
