@@ -12,7 +12,6 @@ public class FileInfo {
     private String[] words;
 
 
-
     // Constructor
     public FileInfo(String filePath) {
         this.filePath = filePath;

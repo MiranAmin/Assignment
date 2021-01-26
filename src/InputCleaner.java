@@ -14,21 +14,10 @@ public class InputCleaner {
         return rawPath.replaceAll("\\\\", "/");
     }
 
-
-    public static void main(String[] args) {
-        String h = "hello these are some words";
-        String[] arr = h.split("\\s+");
-        for (String a : arr) {
-            System.out.println(a);
-        }
-    }
-
-
     // removes the white space characters from the string
     public String removeSpace(String str) {
         return str.replaceAll("\\s+", "");
     }
-
 
     /*
      * Will split the contents of a string on white spaces

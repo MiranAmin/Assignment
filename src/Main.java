@@ -1,6 +1,5 @@
 public class Main {
 
-
     /*
     * Main class is here do demonstrate the library
     *  */
@@ -11,8 +10,6 @@ public class Main {
         process.lineCount();
         process.avgLetterPerWord();
         process.mostFrequentLetter();
-
-
 
     }
 
