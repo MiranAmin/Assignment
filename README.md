@@ -1,10 +1,11 @@
 # Assignment
-This repository contains two classes: 
+This repository contains four classes: 
   - ProcessFiles: preforms the statistical operations on a file
   - InputCleaner: will clean the contents of the file so ProcessFiles class can perform its operations without error
+  - FileInfo: stores the details about the file that is to be processed such as the path, file contents and each word
+  - Main: main simply shows an example of the library working
 
-The ProcessFiles class contains an object of the InputCleaner class and uses it's methods
-in order to perform its own methods without cluttering up the code.
+To abide by the SOLID design principles, the ProcessFiles class contains objects of InputCleaner and FileInfo
 
 A singleton design pattern was used for the object of the InputCleaner to save memory.  
 
