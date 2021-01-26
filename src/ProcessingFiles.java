@@ -16,7 +16,9 @@ public class ProcessingFiles {
     public ProcessingFiles(String filePath) {
         cleaner = setCleaner();
         fileInfo = new FileInfo(cleaner.cleanFilePath(filePath));
+
         fileInfo.setFileContent(readFile());
+
         fileInfo.setWords(splitOnSpaces());
     }
 
@@ -68,7 +70,7 @@ public class ProcessingFiles {
         for (String word : wordArr) {
             letterCount += word.length();
         }
-        System.out.print("Average number of letters: ");
+        System.out.print("Average number of letters per word: ");
         System.out.printf("%.1f", letterCount / wordArr.length);
         System.out.println();
     }

@@ -15,9 +15,12 @@ public class InputCleaner {
     }
 
 
-    // Removes any non alphabetical letters from the String
-    public String cleanFileContents(String str) {
-        return str.replaceAll("[^a-zA-Z]", "");
+    public static void main(String[] args) {
+        String h = "hello these are some words";
+        String[] arr = h.split("\\s+");
+        for (String a : arr) {
+            System.out.println(a);
+        }
     }
 
 
@@ -33,6 +36,11 @@ public class InputCleaner {
      * */
     public String[] splitOnSpaces(String str) {
         return str.split("\\s+");
+    }
+
+    // Removes any non alphabetical letters from the String
+    public String cleanFileContents(String str) {
+        return str.replaceAll("[^a-zA-Z\\s]", "");
     }
 
 
