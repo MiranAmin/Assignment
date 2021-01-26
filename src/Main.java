@@ -6,7 +6,7 @@ public class Main {
     *  */
     public static void main(String[] args) {
 
-        ProcessingFiles process = new ProcessingFiles("C:\\Users\\miran\\Desktop\\test\\text.txt");
+        ProcessingFiles process = new ProcessingFiles("Put file path here");
         process.wordCount();
         process.lineCount();
         process.avgLetterPerWord();
