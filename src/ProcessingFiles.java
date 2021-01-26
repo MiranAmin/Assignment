@@ -7,37 +7,25 @@ import java.util.Scanner;
 
 public class ProcessingFiles {
 
-    private final String filePath;
-    private final String fileContent;
-    private String[] words;
+    // Objects of the FileInfo class and InputCleaner class
+    private final FileInfo fileInfo;
     private static InputCleaner cleaner;
 
 
-
-    /*
-     * Constructor
-     * */
+    // Constructor
     public ProcessingFiles(String filePath) {
         cleaner = setCleaner();
-        this.filePath = new InputCleaner().cleanFilePath(filePath);
-        this.fileContent = readFile();
-        cleanAndSplit();
+        fileInfo = new FileInfo(cleaner.cleanFilePath(filePath));
+        fileInfo.setFileContent(readFile());
+        fileInfo.setWords(splitOnSpaces());
     }
-
-    private InputCleaner setCleaner() {
-        if (getCleaner() == null) {
-            return new InputCleaner();
-        }
-        return cleaner;
-    }
-
 
     /*
      * This method counts the words in a text document, separated by white
      * spaces
      * */
     public void wordCount() {
-        File file = new File(getFilePath());
+        File file = new File(this.fileInfo.getFilePath());
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
             int counter = 0;
             while (scanner.hasNext()) {
@@ -51,11 +39,11 @@ public class ProcessingFiles {
     }
 
     /*
-     * Counts each line in a text document excluding lines that are empty
-     * in the line count
+     * Counts each line in a text document excluding lines that
+     * are empty in the line count
      * */
     public void lineCount() {
-        File file = new File(getFilePath());
+        File file = new File(this.fileInfo.getFilePath());
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
             int counter = 0;
             while (scanner.hasNextLine()) {
@@ -71,10 +59,11 @@ public class ProcessingFiles {
     }
 
     /*
-    * The average number of letters per word is printed to one decimal place
-    * */
+     * The average number of letters per word is printed to one
+     * decimal place
+     * */
     public void avgLetterPerWord() {
-        String[] wordArr = getWords();
+        String[] wordArr = this.fileInfo.getWords();
         double letterCount = 0;
         for (String word : wordArr) {
             letterCount += word.length();
@@ -86,12 +75,13 @@ public class ProcessingFiles {
 
 
     /*
-    * This method will print out the most frequently reoccuring letter
-    * in a string. It does not account for multiple letters that
-    * occur an equal amount of times*/
+     * This method will print out the most frequently reoccurring letter
+     * in a string. It does not account for multiple letters that
+     * occur an equal amount of times
+     * */
     public void mostFrequentLetter() {
-        int ASCII_SIZE = 256;
-        String str = cleaner.removeSpace(getFileContent().toLowerCase());
+        int ASCII_SIZE = 128;
+        String str = cleaner.removeSpace(this.fileInfo.getFileContent().toLowerCase());
         int[] count = new int[ASCII_SIZE];
         int len = str.length();
         for (int i = 0; i < len; i++)
@@ -110,26 +100,21 @@ public class ProcessingFiles {
 
 
     /*
-     * This method cleans the files contents of commas and periods
-     * then splits the input on white spaces and stores
-     * each individual word in the String[] field 'words'
+     * This method splits the input on white spaces and stores
+     * each individual word at a an index in an array
      */
-    private void cleanAndSplit() {
-        setWords(cleaner.splitOnSpaces(getFileContent()));
+    private String[] splitOnSpaces() {
+        return cleaner.splitOnSpaces(this.fileInfo.getFileContent());
     }
-
 
 
     /*
      * Will read the contents from a file and will return the contents
-     * of that file as a string without the commas or periods.
-     *
-     * return type: String
+     * of that file.
      * */
-
     private String readFile() {
         String str = "";
-        try (FileInputStream fis = new FileInputStream(getFilePath())) {
+        try (FileInputStream fis = new FileInputStream(this.fileInfo.getFilePath())) {
             str = cleaner.cleanFileContents(new String(fis.readAllBytes()));
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -138,31 +123,19 @@ public class ProcessingFiles {
     }
 
 
-    /*Prints the contents of the file to the console
-     * */
-    public void printFileContent() {
-        System.out.println(getFileContent());
+    //Getters and Setter
+    private InputCleaner getCleaner() {
+        return cleaner;
     }
-
 
     /*
-     * Getters and Setter
+     * Uses the singleton design pattern to create an input
+     * cleaner
      * */
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public String[] getWords() {
-        return this.words;
-    }
-
-    public String getFileContent() {
-        return this.fileContent;
-    }
-
-    public InputCleaner getCleaner() { return cleaner; }
-
-    private void setWords(String[] arr) {
-        this.words = arr;
+    private InputCleaner setCleaner() {
+        if (getCleaner() == null) {
+            return new InputCleaner();
+        }
+        return cleaner;
     }
 }
