@@ -131,8 +131,8 @@ public class ProcessingFiles {
     }
 
     /*
-     * Uses the singleton design pattern to create an input
-     * cleaner
+     * Uses the singleton design pattern to create and set
+     * an InputCleaner Object
      * */
     private InputCleaner setCleaner() {
         if (getCleaner() == null) {
