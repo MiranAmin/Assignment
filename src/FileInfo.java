@@ -6,9 +6,11 @@ public class FileInfo {
     * */
 
 
-    //fields
+    //stores the path to the text file
     private final String filePath;
+    //stores the text inside the file as a string
     private String fileContent;
+    //each index hold each individual word from the file
     private String[] words;
 
 

@@ -15,11 +15,9 @@ public class ProcessingFiles {
     // Constructor
     public ProcessingFiles(String filePath) {
         cleaner = setCleaner();
-        fileInfo = new FileInfo(cleaner.cleanFilePath(filePath));
-
-        fileInfo.setFileContent(readFile());
-
-        fileInfo.setWords(splitOnSpaces());
+        this.fileInfo = new FileInfo(cleaner.cleanFilePath(filePath));
+        this.fileInfo.setFileContent(readFile());
+        this.fileInfo.setWords(splitOnSpaces());
     }
 
     /*
@@ -86,11 +84,11 @@ public class ProcessingFiles {
         String str = cleaner.removeSpace(this.fileInfo.getFileContent().toLowerCase());
         int[] count = new int[ASCII_SIZE];
         int len = str.length();
-        for (int i = 0; i < len; i++)
+        for (int i = 0; i < len; i++) {
             count[str.charAt(i)]++;
+        }
         int max = -1;
         char result = ' ';
-
         for (int i = 0; i < len; i++) {
             if (max < count[str.charAt(i)]) {
                 max = count[str.charAt(i)];
