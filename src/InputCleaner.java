@@ -7,8 +7,9 @@ public class InputCleaner {
 
 
     /*
-     * Will ensure the backslash character  is converted into a
-     * forward slash so that files are found
+     * Will ensure the backslash character is converted into a
+     * forward slash so that a FileNotFound exception is not thrown
+     * as a consequence of illegal slashes
      * */
     public String cleanFilePath(String rawPath) {
         return rawPath.replaceAll("\\\\", "/");
@@ -21,7 +22,8 @@ public class InputCleaner {
 
     /*
      * Will split the contents of a string on white spaces
-     * and return an array with a word at each index
+     * and return an array containing each individual word
+     * at a unique index in the array
      * */
     public String[] splitOnSpaces(String str) {
         return str.split("\\s+");

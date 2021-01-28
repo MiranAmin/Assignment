@@ -5,7 +5,7 @@ public class Main {
     *  */
     public static void main(String[] args) {
 
-        ProcessingFiles process = new ProcessingFiles("C:\\Users\\miran\\Desktop\\test\\text.txt");
+        FileStatistics process = new FileStatistics("C:\\Users\\miran\\Desktop\\test\\text.txt");
         process.wordCount();
         process.lineCount();
         process.avgLetterPerWord();

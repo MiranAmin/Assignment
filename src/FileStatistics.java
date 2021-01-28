@@ -1,23 +1,20 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 
-public class ProcessingFiles {
+public class FileStatistics {
 
     // Objects of the FileInfo class and InputCleaner class
-    private final FileInfo fileInfo;
+    private final FileDetails fileDetails;
     private static InputCleaner cleaner;
 
 
     // Constructor
-    public ProcessingFiles(String filePath) {
+    public FileStatistics(String filePath) {
         cleaner = setCleaner();
-        this.fileInfo = new FileInfo(cleaner.cleanFilePath(filePath));
-        this.fileInfo.setFileContent(readFile());
-        this.fileInfo.setWords(splitOnSpaces());
+        this.fileDetails = new FileDetails(cleaner.cleanFilePath(filePath));
     }
 
     /*
@@ -25,7 +22,7 @@ public class ProcessingFiles {
      * spaces
      * */
     public void wordCount() {
-        File file = new File(this.fileInfo.getFilePath());
+        File file = new File(this.fileDetails.getFilePath());
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
             int counter = 0;
             while (scanner.hasNext()) {
@@ -43,7 +40,7 @@ public class ProcessingFiles {
      * are empty in the line count
      * */
     public void lineCount() {
-        File file = new File(this.fileInfo.getFilePath());
+        File file = new File(this.fileDetails.getFilePath());
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
             int counter = 0;
             while (scanner.hasNextLine()) {
@@ -63,7 +60,7 @@ public class ProcessingFiles {
      * decimal place
      * */
     public void avgLetterPerWord() {
-        String[] wordArr = this.fileInfo.getWords();
+        String[] wordArr = this.fileDetails.getWords();
         double letterCount = 0;
         for (String word : wordArr) {
             letterCount += word.length();
@@ -81,7 +78,7 @@ public class ProcessingFiles {
      * */
     public void mostFrequentLetter() {
         int ASCII_SIZE = 128;
-        String str = cleaner.removeSpace(this.fileInfo.getFileContent().toLowerCase());
+        String str = cleaner.removeSpace(this.fileDetails.getFileContent().toLowerCase());
         int[] count = new int[ASCII_SIZE];
         int len = str.length();
         for (int i = 0; i < len; i++) {
@@ -97,31 +94,6 @@ public class ProcessingFiles {
         }
         System.out.println("Most frequently occurring letter: " + result);
     }
-
-
-    /*
-     * This method splits the input on white spaces and stores
-     * each individual word at a an index in an array
-     */
-    private String[] splitOnSpaces() {
-        return cleaner.splitOnSpaces(this.fileInfo.getFileContent());
-    }
-
-
-    /*
-     * Will read the contents from a file and will return the contents
-     * of that file.
-     * */
-    private String readFile() {
-        String str = "";
-        try (FileInputStream fis = new FileInputStream(this.fileInfo.getFilePath())) {
-            str = cleaner.cleanFileContents(new String(fis.readAllBytes()));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        return str;
-    }
-
 
     //Getters and Setter
     private InputCleaner getCleaner() {
