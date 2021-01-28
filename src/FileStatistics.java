@@ -22,10 +22,8 @@ public class FileStatistics {
         this.fileDetails = new FileDetails(filePath);
     }
 
-    /*
-     * This method counts the number words in a text document
-     * and prints the total number counted.
-     * */
+
+    // Counts the number words in a text document and prints the total number counted.
     public void wordCount() {
         File file = new File(this.fileDetails.getFilePath());
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
@@ -40,11 +38,7 @@ public class FileStatistics {
         }
     }
 
-    /*
-     * This method counts the number of line in a text document.
-     * However, the count excludes lines that have no word or are simply
-     * lines of empty characters. The total number of lines are printed.
-     * */
+    // Count excludes lines that are empty. The total number of lines are printed.
     public void lineCount() {
         File file = new File(this.fileDetails.getFilePath());
         try (Scanner scanner = new Scanner(new FileInputStream(file))) {
@@ -61,10 +55,7 @@ public class FileStatistics {
         }
     }
 
-    /*
-     * The average number of letters per word is printed to one
-     * decimal place.
-     * */
+    //The average number of letters per word is printed to one decimal place.
     public void avgLetterPerWord() {
         String[] wordArr = this.fileDetails.getIndividualWords();
         double letterCount = 0;
@@ -78,7 +69,7 @@ public class FileStatistics {
 
 
     /*
-     * This method will print out the most frequently reoccurring letter
+     * prints the most frequently reoccurring letter
      * in a string. It does not account for multiple letters that
      * occur an equal amount of times
      * */
@@ -100,6 +91,5 @@ public class FileStatistics {
         }
         System.out.println("Most frequently occurring letter: " + result);
     }
-
 
 }

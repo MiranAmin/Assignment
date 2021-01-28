@@ -29,7 +29,7 @@ public class FileDetails {
         this.cleaner = InputCleaner.getInstance();
         this.filePath = cleaner.cleanFilePath(filePath);
         this.fileContent = readFile(filePath);
-        this.individualWords =  splitOnSpaces();
+        this.individualWords = cleaner.splitOnSpaces(fileContent);
     }
 
     /*
@@ -38,14 +38,6 @@ public class FileDetails {
     * */
     public String contentWithoutSpaces() {
         return cleaner.removeSpace(this.fileContent);
-    }
-
-    /*
-     * This method splits a string on white spaces and stores
-     * each individual word at a an index in the array individualWords[]
-     */
-    private String[] splitOnSpaces() {
-        return this.cleaner.splitOnSpaces(this.fileContent);
     }
 
     /*
