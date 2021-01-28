@@ -6,20 +6,25 @@ import java.util.Scanner;
 
 public class FileStatistics {
 
-    // Objects of the FileInfo class and InputCleaner class
+    /*
+    * This class performs statistical operations on a file
+    * such as the average number of letters per word in a
+    * file, the total number of words in a file etc...
+    * */
+
+
+    //field
     private final FileDetails fileDetails;
-   // private static InputCleaner cleaner;
 
 
     // Constructor
     public FileStatistics(String filePath) {
-       // cleaner = InputCleaner.getInstance();
         this.fileDetails = new FileDetails(filePath);
     }
 
     /*
-     * This method counts the words in a text document, separated by white
-     * spaces
+     * This method counts the number words in a text document
+     * and prints the total number counted.
      * */
     public void wordCount() {
         File file = new File(this.fileDetails.getFilePath());
@@ -36,8 +41,9 @@ public class FileStatistics {
     }
 
     /*
-     * Counts each line in a text document excluding lines that
-     * are empty in the line count
+     * This method counts the number of line in a text document.
+     * However, the count excludes lines that have no word or are simply
+     * lines of empty characters. The total number of lines are printed.
      * */
     public void lineCount() {
         File file = new File(this.fileDetails.getFilePath());
@@ -57,7 +63,7 @@ public class FileStatistics {
 
     /*
      * The average number of letters per word is printed to one
-     * decimal place
+     * decimal place.
      * */
     public void avgLetterPerWord() {
         String[] wordArr = this.fileDetails.getIndividualWords();
@@ -78,7 +84,7 @@ public class FileStatistics {
      * */
     public void mostFrequentLetter() {
         int ASCII_SIZE = 128;
-        String str = fileDetails.contentWithoutSpaces().toLowerCase();    //cleaner.removeSpace(this.fileDetails.getFileContent().toLowerCase());
+        String str = fileDetails.contentWithoutSpaces().toLowerCase();
         int[] count = new int[ASCII_SIZE];
         int len = str.length();
         for (int i = 0; i < len; i++) {

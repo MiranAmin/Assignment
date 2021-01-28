@@ -1,13 +1,17 @@
 public class InputCleaner {
 
     /*
-     * This class acts as a helper class to the ProcessingFiles class.
-     * It performs regular expressions on String inputs
+     * This class acts as a helper class to the FileDetails class.
+     * It performs regular expressions on String inputs.
      *  */
 
+    //field
     private static InputCleaner cleaner;
 
 
+    /*
+    * Singleton
+    * */
     public static InputCleaner getInstance() {
         if(cleaner == null) {
             cleaner = new InputCleaner();
