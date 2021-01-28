@@ -5,8 +5,8 @@ This repository contains four classes:
   - FileDetails.java: stores the details about the file that is to be processed such as the path, file contents and each word
   - Main.java: main simply shows an example of the library working
 
-To abide by the SOLID design principles, the FileStatistics class contains objects of InputCleaner class and FileDetails class 
-
-A singleton design pattern was used for the object of the InputCleaner to save memory.  
+Design of code:
+-SOLID  
+-A singleton design pattern was used for the object of the InputCleaner   
 
   
