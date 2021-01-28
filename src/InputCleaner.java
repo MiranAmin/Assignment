@@ -5,6 +5,15 @@ public class InputCleaner {
      * It performs regular expressions on String inputs
      *  */
 
+    private static InputCleaner cleaner;
+
+
+    public static InputCleaner getInstance() {
+        if(cleaner == null) {
+            cleaner = new InputCleaner();
+        }
+        return cleaner;
+    }
 
     /*
      * Will ensure the backslash character is converted into a

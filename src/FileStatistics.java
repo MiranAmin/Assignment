@@ -8,13 +8,13 @@ public class FileStatistics {
 
     // Objects of the FileInfo class and InputCleaner class
     private final FileDetails fileDetails;
-    private static InputCleaner cleaner;
+   // private static InputCleaner cleaner;
 
 
     // Constructor
     public FileStatistics(String filePath) {
-        cleaner = setCleaner();
-        this.fileDetails = new FileDetails(cleaner.cleanFilePath(filePath));
+       // cleaner = InputCleaner.getInstance();
+        this.fileDetails = new FileDetails(filePath);
     }
 
     /*
@@ -60,7 +60,7 @@ public class FileStatistics {
      * decimal place
      * */
     public void avgLetterPerWord() {
-        String[] wordArr = this.fileDetails.getWords();
+        String[] wordArr = this.fileDetails.getIndividualWords();
         double letterCount = 0;
         for (String word : wordArr) {
             letterCount += word.length();
@@ -78,7 +78,7 @@ public class FileStatistics {
      * */
     public void mostFrequentLetter() {
         int ASCII_SIZE = 128;
-        String str = cleaner.removeSpace(this.fileDetails.getFileContent().toLowerCase());
+        String str = fileDetails.contentWithoutSpaces().toLowerCase();    //cleaner.removeSpace(this.fileDetails.getFileContent().toLowerCase());
         int[] count = new int[ASCII_SIZE];
         int len = str.length();
         for (int i = 0; i < len; i++) {
@@ -95,19 +95,5 @@ public class FileStatistics {
         System.out.println("Most frequently occurring letter: " + result);
     }
 
-    //Getters and Setter
-    private InputCleaner getCleaner() {
-        return cleaner;
-    }
 
-    /*
-     * Uses the singleton design pattern to create and set
-     * an InputCleaner Object
-     * */
-    private InputCleaner setCleaner() {
-        if (getCleaner() == null) {
-            return new InputCleaner();
-        }
-        return cleaner;
-    }
 }
