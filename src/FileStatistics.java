@@ -4,16 +4,16 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
+/**
+ * This class performs statistical operations on the contents of
+ * a file such as counting the total number of words or line in the
+ * file.
+ *
+ * @author Miran Amin
+ */
+
 public class FileStatistics {
 
-    /*
-    * This class performs statistical operations on a file
-    * such as the average number of letters per word in a
-    * file, the total number of words in a file etc...
-    * */
-
-
-    //field
     private final FileDetails fileDetails;
 
 
