@@ -6,6 +6,7 @@ This repository contains four classes:
   - Main.java: main simply shows an example of the library working
 
 Design:
+
 -SOLID
 -A singleton design pattern was used for the object of the Cleaner to save memory.  
 
